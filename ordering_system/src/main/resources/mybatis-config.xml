@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE configuration    
+	PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"    
+	"http://ibatis.apache.org/dtd/ibatis-3-config.dtd">    
+
+  <configuration>  
+  
+  	<settings>  
+    	<!-- 不启用延迟加载 -->  
+        <setting name="lazyLoadingEnabled" value="false"/>  
+    </settings>  
+             
+    <!-- 为bean type起别名  -->  
+    <typeAliases>  
+    	<typeAlias type="com.model.ScheduleJob" alias="scheduleJob"/>  
+    	<typeAlias type="com.model.User" alias="user"/>
+		<typeAlias type="com.model.Staff" alias="staff"/>
+		<typeAlias type="com.model.Department" alias="department"/>
+		<typeAlias type="com.model.StaffCommission" alias="staffCommission"/>
+		<typeAlias type="com.model.Merchant" alias="merchant"/>
+		<typeAlias type="com.model.AgentRetailer" alias="agentRetailer"/>
+		<typeAlias type="com.model.Role" alias="role"/>
+		
+		<typeAlias type="com.model.Brand" alias="brand"/>
+		<typeAlias type="com.model.Series" alias="series"/>
+		<typeAlias type="com.model.Introduction" alias="introduction"/>
+		<typeAlias type="com.model.Campaign" alias="campaign"/>
+		<typeAlias type="com.model.Video" alias="video"/>
+		
+		<typeAlias type="com.model.Product" alias="product"/>
+		<typeAlias type="com.model.ProductImage" alias="productImage"/>
+		<typeAlias type="com.model.ProductSalesattr" alias="productSalesattr"/>
+		<typeAlias type="com.model.ProductStatus" alias="productStatus"/>
+		<typeAlias type="com.model.AssociatedFormat" alias="associatedFormat"/>
+		<typeAlias type="com.model.SalesPromotion" alias="salesPromotion"/>
+		<typeAlias type="com.model.SkuSalesprom" alias="skuSalesprom"/>
+		
+		<typeAlias type="com.model.CartItem" alias="cartItem"/>
+		<typeAlias type="com.model.DeliveryAddress" alias="deliveryAddress"/>
+		<typeAlias type="com.model.Invoice" alias="invoice"/>
+		
+		<typeAlias type="com.model.OrderList" alias="orderList"/>
+		<typeAlias type="com.model.OrderType" alias="orderType"/>
+		<typeAlias type="com.model.OrderStatus" alias="orderStatus"/>
+		<typeAlias type="com.model.LogisticsCompany" alias="logisticsCompany"/>
+		<typeAlias type="com.model.Freight" alias="freight"/>
+		<typeAlias type="com.model.OrderItem" alias="orderItem"/>
+		
+		<typeAlias type="com.model.ReviewCurrent" alias="reviewCurrent"/>
+		<typeAlias type="com.model.ReviewHistory" alias="reviewHistory"/>    
+    </typeAliases>  
+              
+    <!-- 配置orm映射 -->  
+    <mappers>   
+    	<mapper resource="mappers/User.xml"/>
+		<mapper resource="mappers/Staff.xml"/>
+		<mapper resource="mappers/Department.xml"/>
+		<mapper resource="mappers/StaffCommission.xml"/>
+		<mapper resource="mappers/Merchant.xml"/>
+		<mapper resource="mappers/AgentRetailer.xml"/>
+		<mapper resource="mappers/Role.xml"/>
+		
+		<mapper resource="mappers/Brand.xml"/>
+		<mapper resource="mappers/Series.xml"/>
+		<mapper resource="mappers/Introduction.xml"/>
+		<mapper resource="mappers/Campaign.xml"/>
+		<mapper resource="mappers/Video.xml"/>
+		
+		<mapper resource="mappers/Product.xml"/>
+		<mapper resource="mappers/ProductImage.xml"/>
+		<mapper resource="mappers/ProductSalesattr.xml"/>
+		<mapper resource="mappers/ProductStatus.xml"/>
+		<mapper resource="mappers/AssociatedFormat.xml"/>
+		<mapper resource="mappers/SalesPromotion.xml"/>
+		<mapper resource="mappers/SkuSalesprom.xml"/>
+		
+		<mapper resource="mappers/CartItem.xml"/>
+		<mapper resource="mappers/DeliveryAddress.xml"/>
+		<mapper resource="mappers/Invoice.xml"/>
+		
+		<mapper resource="mappers/OrderList.xml"/>
+		<mapper resource="mappers/OrderType.xml"/>
+		<mapper resource="mappers/OrderStatus.xml"/>
+		<mapper resource="mappers/LogisticsCompany.xml"/>
+		<mapper resource="mappers/Freight.xml"/>
+		<mapper resource="mappers/OrderItem.xml"/>
+		
+		<mapper resource="mappers/ReviewCurrent.xml"/>
+		<mapper resource="mappers/ReviewHistory.xml"/>   
+    </mappers>  
+    
+  </configuration>  

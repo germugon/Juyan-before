@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- 数据库连接驱动地址 -->
+    <classPathEntry location="mysql-connector-java-5.1.37-bin.jar"/>
+	
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+	
+        <commentGenerator>
+			<!-- 是否取消时间戳 -->
+            <property name="suppressDate" value="true"/>
+			<!-- 是否取消注释 -->
+            <property name="suppressAllComments" value="false"/>
+        </commentGenerator>
+		
+        <!-- 数据库连接账号密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/juyan" 
+			userId="juyan" password="juyan2016" />
+			
+        <javaTypeResolver>
+			<!-- false时把DECIMAL和NUMERIC解析为Integer，true时解析为java.math.BigDecimal -->
+            <property name="forceBigDecimals" value="true"/>
+        </javaTypeResolver>
+		
+        <!-- 生成实体类的位置(POJO) -->
+        <javaModelGenerator targetPackage="com.model" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+		
+        <!-- 生成映射文件的位置(sql) -->
+        <sqlMapGenerator targetPackage="mappers" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+		
+        <!-- 生成Dao类的位置(接口) -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.dao" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+		
+        <!-- 指定表对应生成的类 -->
+        <table tableName="user" domainObjectName="User"></table>
+		<table tableName="staff" domainObjectName="Staff"></table>
+		<table tableName="department" domainObjectName="Department"></table>
+		<table tableName="staff_commission" domainObjectName="StaffCommission"></table>
+		<table tableName="merchant" domainObjectName="Merchant"></table>
+		<table tableName="agent_retailer" domainObjectName="AgentRetailer"></table>
+		<table tableName="role" domainObjectName="Role"></table>
+		
+		<table tableName="brand" domainObjectName="Brand"></table>
+		<table tableName="series" domainObjectName="Series"></table>
+		<table tableName="introduction" domainObjectName="Introduction"></table>
+		<table tableName="campaign" domainObjectName="Campaign"></table>
+		<table tableName="video" domainObjectName="Video"></table>
+		
+		<table tableName="product" domainObjectName="Product"></table>
+		<table tableName="product_image" domainObjectName="ProductImage"></table>
+		<table tableName="product_salesattr" domainObjectName="ProductSalesattr"></table>
+		<table tableName="product_status" domainObjectName="ProductStatus"></table>
+		<table tableName="associated_format" domainObjectName="AssociatedFormat"></table>
+		<table tableName="sales_promotion" domainObjectName="SalesPromotion"></table>
+		<table tableName="sku_salesprom" domainObjectName="SkuSalesprom"></table>
+		
+		<table tableName="cart_item" domainObjectName="CartItem"></table>
+		<table tableName="delivery_address" domainObjectName="DeliveryAddress"></table>
+		<table tableName="invoice" domainObjectName="Invoice"></table>
+		
+		<table tableName="order_list" domainObjectName="OrderList"></table>
+		<table tableName="order_type" domainObjectName="OrderType"></table>
+		<table tableName="order_status" domainObjectName="OrderStatus"></table>
+		<table tableName="logistics_company" domainObjectName="LogisticsCompany"></table>
+		<table tableName="freight" domainObjectName="Freight"></table>
+		<table tableName="order_item" domainObjectName="OrderItem"></table>
+		
+		<table tableName="review_current" domainObjectName="ReviewCurrent"></table>
+		<table tableName="review_history" domainObjectName="ReviewHistory"></table>
+		
+    </context>
+	
+</generatorConfiguration>
