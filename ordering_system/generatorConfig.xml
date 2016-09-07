@@ -21,7 +21,7 @@
 			
         <javaTypeResolver>
 			<!-- false时把DECIMAL和NUMERIC解析为Integer，true时解析为java.math.BigDecimal -->
-            <property name="forceBigDecimals" value="true"/>
+            <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 		
         <!-- 生成实体类的位置(POJO) -->

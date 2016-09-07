@@ -7,9 +7,9 @@
 </head>
 <body>
 <h2>Welcome!</h2>
-账号：${sessionScope.user_session.account}<br>
-名称：${sessionScope.user_session.name}<br>
-密码：${sessionScope.user_session.password}<br>
+账号：${sessionScope.user.account}<br>
+名称：${sessionScope.user.name}<br>
+密码：${sessionScope.user.password}<br>
 ${msg}
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -404,73 +405,123 @@ public class ProductExample {
             return (Criteria) this;
         }
 
-        public Criteria andPriceRangeIsNull() {
-            addCriterion("price_range is null");
+        public Criteria andMinPriceIsNull() {
+            addCriterion("min_price is null");
             return (Criteria) this;
         }
 
-        public Criteria andPriceRangeIsNotNull() {
-            addCriterion("price_range is not null");
+        public Criteria andMinPriceIsNotNull() {
+            addCriterion("min_price is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPriceRangeEqualTo(String value) {
-            addCriterion("price_range =", value, "priceRange");
+        public Criteria andMinPriceEqualTo(BigDecimal value) {
+            addCriterion("min_price =", value, "minPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceRangeNotEqualTo(String value) {
-            addCriterion("price_range <>", value, "priceRange");
+        public Criteria andMinPriceNotEqualTo(BigDecimal value) {
+            addCriterion("min_price <>", value, "minPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceRangeGreaterThan(String value) {
-            addCriterion("price_range >", value, "priceRange");
+        public Criteria andMinPriceGreaterThan(BigDecimal value) {
+            addCriterion("min_price >", value, "minPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceRangeGreaterThanOrEqualTo(String value) {
-            addCriterion("price_range >=", value, "priceRange");
+        public Criteria andMinPriceGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("min_price >=", value, "minPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceRangeLessThan(String value) {
-            addCriterion("price_range <", value, "priceRange");
+        public Criteria andMinPriceLessThan(BigDecimal value) {
+            addCriterion("min_price <", value, "minPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceRangeLessThanOrEqualTo(String value) {
-            addCriterion("price_range <=", value, "priceRange");
+        public Criteria andMinPriceLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("min_price <=", value, "minPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceRangeLike(String value) {
-            addCriterion("price_range like", value, "priceRange");
+        public Criteria andMinPriceIn(List<BigDecimal> values) {
+            addCriterion("min_price in", values, "minPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceRangeNotLike(String value) {
-            addCriterion("price_range not like", value, "priceRange");
+        public Criteria andMinPriceNotIn(List<BigDecimal> values) {
+            addCriterion("min_price not in", values, "minPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceRangeIn(List<String> values) {
-            addCriterion("price_range in", values, "priceRange");
+        public Criteria andMinPriceBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("min_price between", value1, value2, "minPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceRangeNotIn(List<String> values) {
-            addCriterion("price_range not in", values, "priceRange");
+        public Criteria andMinPriceNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("min_price not between", value1, value2, "minPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceRangeBetween(String value1, String value2) {
-            addCriterion("price_range between", value1, value2, "priceRange");
+        public Criteria andMaxPriceIsNull() {
+            addCriterion("max_price is null");
             return (Criteria) this;
         }
 
-        public Criteria andPriceRangeNotBetween(String value1, String value2) {
-            addCriterion("price_range not between", value1, value2, "priceRange");
+        public Criteria andMaxPriceIsNotNull() {
+            addCriterion("max_price is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxPriceEqualTo(BigDecimal value) {
+            addCriterion("max_price =", value, "maxPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxPriceNotEqualTo(BigDecimal value) {
+            addCriterion("max_price <>", value, "maxPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxPriceGreaterThan(BigDecimal value) {
+            addCriterion("max_price >", value, "maxPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxPriceGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("max_price >=", value, "maxPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxPriceLessThan(BigDecimal value) {
+            addCriterion("max_price <", value, "maxPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxPriceLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("max_price <=", value, "maxPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxPriceIn(List<BigDecimal> values) {
+            addCriterion("max_price in", values, "maxPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxPriceNotIn(List<BigDecimal> values) {
+            addCriterion("max_price not in", values, "maxPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxPriceBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("max_price between", value1, value2, "maxPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxPriceNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("max_price not between", value1, value2, "maxPrice");
             return (Criteria) this;
         }
 

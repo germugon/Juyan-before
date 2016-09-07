@@ -726,73 +726,73 @@ public class ProductSalesattrExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsInsepectIsNull() {
-            addCriterion("is_insepect is null");
+        public Criteria andIsInspectIsNull() {
+            addCriterion("is_inspect is null");
             return (Criteria) this;
         }
 
-        public Criteria andIsInsepectIsNotNull() {
-            addCriterion("is_insepect is not null");
+        public Criteria andIsInspectIsNotNull() {
+            addCriterion("is_inspect is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIsInsepectEqualTo(String value) {
-            addCriterion("is_insepect =", value, "isInsepect");
+        public Criteria andIsInspectEqualTo(String value) {
+            addCriterion("is_inspect =", value, "isInspect");
             return (Criteria) this;
         }
 
-        public Criteria andIsInsepectNotEqualTo(String value) {
-            addCriterion("is_insepect <>", value, "isInsepect");
+        public Criteria andIsInspectNotEqualTo(String value) {
+            addCriterion("is_inspect <>", value, "isInspect");
             return (Criteria) this;
         }
 
-        public Criteria andIsInsepectGreaterThan(String value) {
-            addCriterion("is_insepect >", value, "isInsepect");
+        public Criteria andIsInspectGreaterThan(String value) {
+            addCriterion("is_inspect >", value, "isInspect");
             return (Criteria) this;
         }
 
-        public Criteria andIsInsepectGreaterThanOrEqualTo(String value) {
-            addCriterion("is_insepect >=", value, "isInsepect");
+        public Criteria andIsInspectGreaterThanOrEqualTo(String value) {
+            addCriterion("is_inspect >=", value, "isInspect");
             return (Criteria) this;
         }
 
-        public Criteria andIsInsepectLessThan(String value) {
-            addCriterion("is_insepect <", value, "isInsepect");
+        public Criteria andIsInspectLessThan(String value) {
+            addCriterion("is_inspect <", value, "isInspect");
             return (Criteria) this;
         }
 
-        public Criteria andIsInsepectLessThanOrEqualTo(String value) {
-            addCriterion("is_insepect <=", value, "isInsepect");
+        public Criteria andIsInspectLessThanOrEqualTo(String value) {
+            addCriterion("is_inspect <=", value, "isInspect");
             return (Criteria) this;
         }
 
-        public Criteria andIsInsepectLike(String value) {
-            addCriterion("is_insepect like", value, "isInsepect");
+        public Criteria andIsInspectLike(String value) {
+            addCriterion("is_inspect like", value, "isInspect");
             return (Criteria) this;
         }
 
-        public Criteria andIsInsepectNotLike(String value) {
-            addCriterion("is_insepect not like", value, "isInsepect");
+        public Criteria andIsInspectNotLike(String value) {
+            addCriterion("is_inspect not like", value, "isInspect");
             return (Criteria) this;
         }
 
-        public Criteria andIsInsepectIn(List<String> values) {
-            addCriterion("is_insepect in", values, "isInsepect");
+        public Criteria andIsInspectIn(List<String> values) {
+            addCriterion("is_inspect in", values, "isInspect");
             return (Criteria) this;
         }
 
-        public Criteria andIsInsepectNotIn(List<String> values) {
-            addCriterion("is_insepect not in", values, "isInsepect");
+        public Criteria andIsInspectNotIn(List<String> values) {
+            addCriterion("is_inspect not in", values, "isInspect");
             return (Criteria) this;
         }
 
-        public Criteria andIsInsepectBetween(String value1, String value2) {
-            addCriterion("is_insepect between", value1, value2, "isInsepect");
+        public Criteria andIsInspectBetween(String value1, String value2) {
+            addCriterion("is_inspect between", value1, value2, "isInspect");
             return (Criteria) this;
         }
 
-        public Criteria andIsInsepectNotBetween(String value1, String value2) {
-            addCriterion("is_insepect not between", value1, value2, "isInsepect");
+        public Criteria andIsInspectNotBetween(String value1, String value2) {
+            addCriterion("is_inspect not between", value1, value2, "isInspect");
             return (Criteria) this;
         }
 

@@ -1,0 +1,23 @@
+<div class="form-group has-feedback">
+                	<label class="control-label" style="margin-right:10px">手机号 </label>
+                 	<input type="text" id="phone" name="phone" placeholder="请输入您的手机号"
+                 		class="form-control" style="width:300px"/>
+                  	<span class="glyphicon glyphicon-ok green form-control-feedback"></span>
+              	</div>
+             	<br>
+					
+				<div class="form-group-inline">
+	          		<label class="control-label" style="margin-right:10px">验证码 </label>
+	            	<input type="text" id="pin" name="pin" 
+	                	placeholder="请输入您收到的验证码" class="form-control">
+	              	<button type="button" id="getPin" class="btn btn-default">获取验证码</button>
+	          	</div>
+                
+                <div style="color:red; margin-top:10px;">
+                    <c:if test="${msg != null}">		       		
+			        	${msg}			        	
+			        </c:if>
+			    </div> 
+			      
+          		<input type="hidden" name="roleNo" value="4"/>
+            	<button type="submit" class="btn btn-primary" style="width:170px">下一步</button>

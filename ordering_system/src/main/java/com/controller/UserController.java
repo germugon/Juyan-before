@@ -34,18 +34,29 @@ public class UserController{
 		ModelAndView modelAndView = new ModelAndView(); 
 		
 		logger.info(user);
-		User usr = userService.ifUserExist(user.getAccount(), user.getPassword());
+		User usr = userService.ifUserExist(user.getAccount(), user.getPassword(), user.getRoleNo());
 		
 		if(usr == null) {
-			modelAndView.setViewName("error");
+			modelAndView.setViewName("login");
 			modelAndView.addObject("msg", "用户名与密码不匹配");
 		} else {
 			modelAndView.setViewName("login_success");
-//			modelAndView.addObject("user", usr);
-			session.setAttribute(ConfigUtil.USER_SESSION, usr);
+			session.setAttribute(ConfigUtil.SESSION_USER, usr);
 			modelAndView.addObject("msg", "登录成功");
 		}
 		return modelAndView;
+	}
+	
+	@RequestMapping("ifPhoneExist") 
+	public void ifPhoneExist(@RequestParam("phone") String phone, @RequestParam("roleNo") int roleNo, 
+			Writer writer) throws IOException {
+		
+		User user = userService.ifPhoneExist(phone,roleNo);
+		if(user != null) {
+			writer.write(user.getAccount());
+		} else {
+			writer.write("");
+		}
 	}
 	
 	@RequestMapping("sendPin")  
@@ -54,21 +65,30 @@ public class UserController{
 		String pin = userService.sendPin(phone);
 		logger.info(pin);
 		
-		CookieUtil.addCookie(ConfigUtil.PIN_COOKIE, pin, 15 * 60, response);	//设置为15min有效  
+		CookieUtil.addCookie(ConfigUtil.COOKIE_PHONE, phone, 15 * 60, response);	//设置为15min有效
+		CookieUtil.addCookie(ConfigUtil.COOKIE_PIN, pin, 15 * 60, response);		//设置为15min有效  
 	}
 	
 	@RequestMapping("verifyByPhone")  
-	public ModelAndView verifyByPhone(@RequestParam("phone") String phone, @RequestParam("pin") String pin,
+	public ModelAndView verifyByPhone(@RequestParam("pin") String pin1, @RequestParam("roleNo") int roleNo, 
 			HttpServletRequest request) {
 		
 		ModelAndView modelAndView = new ModelAndView(); 
 		
-		String pin2 = CookieUtil.getCookie(ConfigUtil.PIN_COOKIE, request);
-		logger.info(pin + " " + pin2);
+		String phone = CookieUtil.getCookie(ConfigUtil.COOKIE_PHONE, request);
+		String pin2 = CookieUtil.getCookie(ConfigUtil.COOKIE_PIN, request);
+		logger.info(pin1 + " " + pin2);
 		
-		if(pin.equals(pin2)) {
-			modelAndView.setViewName("fill_basic_info");
-			modelAndView.addObject("phone", phone);
+		if(pin1.equals(pin2)) {
+//			User user = userService.ifPhoneExist(phone,roleNo);
+//			if(user != null) {
+//				modelAndView.setViewName("register");
+//				modelAndView.addObject("phone", phone);
+//				modelAndView.addObject("msg", "该手机号已被注册，请使用手机号登录");
+//			} else {
+				modelAndView.setViewName("fill_basic_info");
+				modelAndView.addObject("phone", phone);
+//			}
 		} else {
 			modelAndView.setViewName("register");
 			modelAndView.addObject("phone", phone);
@@ -95,9 +115,14 @@ public class UserController{
 		logger.info(merchant);
 		String merchantNo = merchant.getMerchantNo();
 		
-		if(userService.ifAccountExist(merchantNo)) {
+		if(merchantNo == null || merchantNo.equals("")) {
+			modelAndView.setViewName("error");
+			modelAndView.addObject("msg", "用户名不能为空");
+			
+		} else if(userService.ifAccountExist(merchantNo)) {
 			modelAndView.setViewName("error");
 			modelAndView.addObject("msg", "用户名已存在");
+			
 		} else {
 			merchant.setName(merchant.getMerchantNo());
 			int res = userService.addMerchant(merchant);

@@ -52,62 +52,14 @@
     <!-- The fav icon -->
     <link rel="shortcut icon" href="img/favicon.ico">
 
-	<style>
-		a { text-decoration:none; }
-		a:hover { color:red; text-decoration:none; } 
-	</style>
+	<!-- my custom css -->
+	<link href='css/custom.css' rel='stylesheet'>
 </head>
 
 <body>
-    <!-- topbar starts -->
-    <div class="navbar navbar-default" role="navigation">
 
-        <div class="navbar-inner">
-            <button type="button" class="navbar-toggle pull-left animated flip">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.html"> <img alt="Charisma Logo" src="img/logo20.png" class="hidden-xs" 
-            	style="width:72px;height:38px"/></a>
-
-            <!-- user dropdown starts -->
-            <div class="btn-group pull-right">
-                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> 
-                    	${sessionScope.user_session.account}
-                    </span>
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">账户设置</a></li>
-                    <li class="divider"></li>
-                    <li><a href="login.html">退出</a></li>
-                </ul>
-            </div>
-            <!-- user dropdown ends -->
-
-            <ul class="collapse navbar-collapse nav navbar-nav top-menu">
-                <li class="dropdown">
-                    <a href="#" data-toggle="dropdown"><i class="glyphicon glyphicon-info-sign"></i> 关于聚妍 <span
-                            class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">公司介绍</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">OPI</a></li>
-                        <li><a href="#">贝瑞可</a></li>
-                        <li><a href="#">CND</a></li>
-                        <li><a href="#">YOUKA</a></li>
-                    </ul>
-                </li>
-                <li><a href="#"><i class="glyphicon glyphicon-globe"></i> 最近消息及活动</a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-star"></i> 联系方式</a></li>               
-            </ul>
-
-        </div>
-    </div>
-    <!-- topbar ends -->
+<!-- topbar -->
+<%@include file="topbar.jsp" %>    
     
 <div class="ch-container">
     <div class="row">
@@ -119,47 +71,50 @@
 	        <!--/span-->
 	    </div><!--/row-->
     
-        <div id="content" class="col-md-4 center ">
+        <div id="content" class="col-md-3 center ">
             <!-- content starts -->
-			<c:if test="msg!=null">
-	       		<div class="alert alert-danger">
-	        		${msg}
-	        	</div>
-	        </c:if>
-	        	
-			<form class="form-inline" action="verifyByPhone" method="post">
-                <fieldset>
-                    <div class="form-group has-feedback">
-                        <label class="control-label" style="margin-right:10px">手机号 </label>
-                        <input type="text" id="phone" name="phone" placeholder="请输入您的手机号"
-                        	class="form-control" style="width:300px"/>
-                        <span class="glyphicon glyphicon-ok green form-control-feedback"></span>
-                    </div>
-                    <div class="clearfix"></div><br>
+
+			<form class="form-inline" onsubmit="check_pin()" action="verifyByPhone" method="post">
+            	<table>
+            		<tr>
+            			<td><label>手机号 </label></td>
+                		<td colspan="2"><input type="text" id="phone" name="phone" placeholder="请输入您的手机号" 
+                				value="${phone}" class="form-control" style="width:320px"/></td>
+                 		<td id="phone_warn"></td>
+					</tr>
 					
-					<div class="form-group-inline">
-	                    <label class="control-label" style="margin-right:10px">验证码 </label>
-	                    <input type="text" id="pin" name="pin" 
-	                    	placeholder="请输入您收到的验证码" class="form-control">
-	                    <button type="button" id="getPin" class="btn btn-default">获取验证码</button>
-	                </div>
-                    <div class="clearfix"></div><br>
+	          		<tr>
+            			<td><label>验证码 </label></td>
+	            		<td><input type="text" id="pin" name="pin" 
+	                			placeholder="请输入您收到的验证码" class="form-control"></td>
+	              		<td><button type="button" id="getPin" class="btn btn-default">获取验证码</button></td>
+	              		<td id="pin_warn"></td>
+	              	</tr>
+                
+                	<tr>
+            			<td></td>
+            			<td><div style="color:red;"><c:if test="${msg != null}">${msg}</c:if></div></td>
+            			<td></td>
+            			<td></td>
+            		</tr>
+                	
+                	<tr>
+                		<td><input type="hidden" name="roleNo" value="4"/></td>
+            			<td><button type="submit" id="next" class="btn btn-primary" style="width:200px">下一步</button></td>
+            			<td></td>
+            			<td></td>
+                	</tr>
+
+				</table>
                    
-                   <button type="submit" class="btn btn-primary" style="width:170px">下一步</button>
-                   
-                </fieldset>
             </form>
 			
     		<!-- content ends -->
     	</div><!--/#content.col-md-0-->
 	</div><!--/fluid-row-->
 
-	<hr>
-    <footer class="row">
-        <p class="col-md-9 col-sm-9 col-xs-12 copyright">&copy; Juyan 2016 - 2017</p>
-
-        <p class="col-md-3 col-sm-3 col-xs-12 powered-by"><a href="">联系客服</a></p>
-    </footer>
+	<!-- footer -->
+	<%@include file="footer.jsp" %>
 
 </div><!--/.fluid-container-->
 
@@ -198,8 +153,80 @@
 <!-- application script for Charisma demo -->
 <script src="js/charisma.js"></script>
 
+<!-- my custom js -->
+<script src="js/custom.js"></script>
+
 <script type="text/javascript">
+function getPin_disabled(op){
+	if(op == true) {
+		$("#getPin").attr("disabled","true");
+	} else {
+		$("#getPin").removeAttr("disabled");
+	}
+}
+
+function next_disabled(op){
+	if(op == true) {
+		$("#next").attr("disabled","true");
+	} else {
+		$("#next").removeAttr("disabled");
+	}
+}
+
+function check_phone(){
+	var phone = $("#phone").val();
+	//验证手机格式！！！
+	if(phone != null || phone != ""){
+		$.ajax({
+		   	type: "POST",
+		   	url: "ifPhoneExist",
+		   	data: {
+		   		phone : phone,
+		   		roleNo : 4
+		   	},
+		   	dataType:"text",
+		   	success: function(data){
+		   		if(data == "existent") {
+		   			$("#phone_warn").html("<div style='color:red;'>该手机号已被注册，请使用手机号登录</div>");
+		   			getPin_disabled(true);
+		   			next_disabled(true);
+		   		} else {
+		   			$("#phone_warn").html("<div class='glyphicon glyphicon-ok green'></div>");
+		   			getPin_disabled(false);
+		   			next_disabled(false);
+		   		}
+		   	},
+		   	error: function(){
+		    	alert("验证手机号失败");
+		   	}
+		});
+	} else {
+		$("#phone_warn").html("<div style='color:red;'>手机号不能为空</div>");
+		getPin_disabled(true);
+		next_disabled(true);
+	}
+}
+
+function check_pin(){
+	var pin1 = $("#pin").val();
+	var pin2 = $.cookie("pin");
+	
+	if ( pin1 != pin2){
+		$("#pin_warn").html("<div class='glyphicon glyphicon-remove red'></div>");
+		next_disabled(true);
+		return false;
+    } else {
+    	$("#pin_warn").html("<div class='glyphicon glyphicon-ok green'></div>");
+    	next_disabled(false);
+    	return true;
+    }
+}
+
 $(function(){
+	$("#phone").change(check_phone);
+	
+	$("#pin").change(check_pin);
+	
 	$("#getPin").click(function(){
 		var phone = $("#phone").val();
 		if(phone != null){

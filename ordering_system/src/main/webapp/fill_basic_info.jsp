@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -51,63 +52,14 @@
     <!-- The fav icon -->
     <link rel="shortcut icon" href="img/favicon.ico">
 
-	<style>
-		a { text-decoration:none; }
-		a:hover { color:red; text-decoration:none; } 
-		td.title { text-align:right; vertical-align:middle; }
-	</style>
+	<!-- my custom css -->
+	<link href='css/custom.css' rel='stylesheet'>
 </head>
 
 <body>
-    <!-- topbar starts -->
-    <div class="navbar navbar-default" role="navigation">
 
-        <div class="navbar-inner">
-            <button type="button" class="navbar-toggle pull-left animated flip">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.html"> <img alt="Charisma Logo" src="img/logo20.png" class="hidden-xs" 
-            	style="width:72px;height:38px"/></a>
-
-            <!-- user dropdown starts -->
-            <div class="btn-group pull-right">
-                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> 
-                    	${sessionScope.user_session.account}
-                    </span>
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">账户设置</a></li>
-                    <li class="divider"></li>
-                    <li><a href="login.html">退出</a></li>
-                </ul>
-            </div>
-            <!-- user dropdown ends -->
-
-            <ul class="collapse navbar-collapse nav navbar-nav top-menu">
-                <li class="dropdown">
-                    <a href="#" data-toggle="dropdown"><i class="glyphicon glyphicon-info-sign"></i> 关于聚妍 <span
-                            class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">公司介绍</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">OPI</a></li>
-                        <li><a href="#">贝瑞可</a></li>
-                        <li><a href="#">CND</a></li>
-                        <li><a href="#">YOUKA</a></li>
-                    </ul>
-                </li>
-                <li><a href="#"><i class="glyphicon glyphicon-globe"></i> 最近消息及活动</a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-star"></i> 联系方式</a></li>               
-            </ul>
-
-        </div>
-    </div>
-    <!-- topbar ends -->
+<!-- topbar -->
+<%@include file="topbar.jsp" %>  
     
 <div class="ch-container">
     <div class="row">
@@ -119,42 +71,42 @@
 	    </div><!--/row-->
     
     
-        <div id="content" class="col-md-6 center ">
+        <div id="content" class="col-md-3 center ">
             <!-- content starts -->
 
-			<form class="form-inline" onsubmit="return check_all()" action="register" method="post">
+			<form onsubmit="return check_all()" action="register" method="post">
                 <table>
                 	<tr>
-	                    <td class="title"><label class="control-label">登录名 </label></td>
+	                    <td class="title"><label>登录名 </label></td>
 	                    <td>${phone}</td>
 	                    <td><input type="hidden" name="phone" value="${phone}"/></td>
 	                </tr>
                                        
                     <tr>
-                    	<td class="title"><label class="control-label">设置登录密码</label></td>
+                    	<td class="title"><label>设置登录密码</label></td>
                     </tr>
                     <tr>
 	                    <td class="title">登录密码</td>
-	                    <td><input type="password" id="password1" name="password" 
+	                    <td><input type="password" id="password" name="password" 
 	                    	placeholder="设置您的登录密码" class="form-control"></td>
-	                    <td id="pwd1_warn"></td>
+	                    <td id="password_warn"></td>
 					</tr>
 					
                     <tr>
 	                    <td class="title">密码确认 </td>
-	                    <td><input type="password" id="password2" name="password2" 
+	                    <td><input type="password" id="password_confirm" name="password_confirm" 
 	                    	placeholder="请再次输入您的密码" class="form-control"></td>
-	                    <td id="pwd2_warn"></td>
+	                    <td id="password_confirm_warn"></td>
 					</tr>
                     
                     <tr>
-                    	<td class="title"><label class="control-label">设置账号</label></td>
+                    	<td class="title"><label>设置账号</label></td>
                     </tr>
                     <tr>
 	                    <td class="title">登录名 </td>
 	                    <td><input type="text" id="account" name="merchantNo" 
 	                    	placeholder="账号一旦设置成功，无法修改" class="form-control"></td>
-	                    <td id="act_warn"></td>
+	                    <td id="account_warn"></td>
 					</tr>
 					
                     <tr>
@@ -169,12 +121,8 @@
     	</div><!--/#content.col-md-0-->
 	</div><!--/fluid-row-->
 
-	<hr>
-    <footer class="row">
-        <p class="col-md-9 col-sm-9 col-xs-12 copyright">&copy; Juyan 2016 - 2017</p>
-
-        <p class="col-md-3 col-sm-3 col-xs-12 powered-by"><a href="">联系客服</a></p>
-    </footer>
+	<!-- footer -->
+	<%@include file="footer.jsp" %>
 
 </div><!--/.fluid-container-->
 
@@ -213,6 +161,9 @@
 <!-- application script for Charisma demo -->
 <script src="js/charisma.js"></script>
 
+<!-- my custom js -->
+<script src="js/custom.js"></script>
+
 <script type="text/javascript">
 function next_disabled(op){
 	if(op == true) {
@@ -221,35 +172,35 @@ function next_disabled(op){
 		$("#next").removeAttr("disabled");
 	}
 }
-function check_password1(){
-	var password1 = $("#password1").val();
-	/*
-	if(password1 != null){/////////////////////
-		$("#pwd1_warn").html("密码设置不符合要求");
+
+function check_password(){
+	var password = $("#password").val();
+	//验证密码格式！！！
+	if(password == null || password == ""){
+		$("#password_warn").html("<div style='color:red;'>密码不能为空</div>");
 		return false;
 	} else {
-		$("#pwd1_warn").html("正确");
+		$("#password_warn").html("<div class='glyphicon glyphicon-ok green'></div>");
 		return true;
 	}
-	*/
-	return true;
 }
 
-function check_password2(){
-	var password1 = $("#password1").val();
-	var password2 = $("#password2").val();
-	if(password1 != password2){
-		$("#pwd2_warn").html("两次密码输入不一致");
+function check_password_confirm(){
+	var password = $("#password").val();
+	var password_confirm = $("#password_confirm").val();
+	if(password != password_confirm){
+		$("#password_confirm_warn").html("<div style='color:red;'>两次密码输入不一致</div>");
 		return false;
-	} else {/////////////////////////
-		$("#pwd2_warn").html("");
+	} else {
+		$("#password_confirm_warn").html("<div class='glyphicon glyphicon-ok green'></div>");
 		return true;
 	}
 }
 
 function check_account(){
 	var account = $("#account").val();
-	if(account != null){
+	//验证账号格式！！！
+	if(account != null || account != ""){
 		$.ajax({
 		   	type: "POST",
 		   	url: "ifAccountExist",
@@ -259,10 +210,10 @@ function check_account(){
 		   	dataType:"text",
 		   	success: function(data){
 		   		if(data == "existent") {
-		   			$("#act_warn").html("该账号已被使用，请选择其他账号");
+		   			$("#account_warn").html("<div style='color:red;'>该账号已被使用，请选择其他账号</div>");
 		   			next_disabled(true);
 		   		} else {
-		   			$("#act_warn").html("");
+		   			$("#account_warn").html("");
 		   			next_disabled(false);
 		   		}
 		   	},
@@ -270,14 +221,17 @@ function check_account(){
 		    	alert("验证账号失败");
 		   	}
 		});
+	} else {
+		$("#account_warn").html("<div style='color:red;'>账号不能为空</div>");
+		next_disabled(true);
 	}
 }
 
 function check_all(){
-	if(check_password1() && check_password2()){
+	if(check_password() && check_password_confirm()){
 		next_disabled(false);
 		check_account();
-		if($("#act_warn").html() == null || $("#act_warn").html() == ''){
+		if($("#account_warn").html() == null || $("#account_warn").html() == ''){
 			return true;
 		} else{
 			return false;
@@ -289,21 +243,21 @@ function check_all(){
 }
 
 $(function(){
-	$("#password1").change(function(){
-		if(check_password1()) {
+	$("#password").change(function(){
+		if(check_password()) {
 			next_disabled(false);
 		} else {
 			next_disabled(true);
 		}	
 	});
 	
-	$("#password2").change(function(){
-		if(check_password2()){
+	$("#password_confirm").change(function(){
+		if(check_password_confirm()){
 			next_disabled(false);
 		} else {
 			next_disabled(true);
 		}	
-		});
+	});
 	
 	$("#account").change(check_account);
 });

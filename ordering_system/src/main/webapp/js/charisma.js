@@ -170,10 +170,46 @@ function docReady() {
     });
 
     //uploadify - multiple uploads
-    $('#file_upload').uploadify({
+    $('#image_upload').uploadify({
         'swf': 'misc/uploadify.swf',
-        'uploader': 'misc/uploadify.php'
-        // Put your options here
+        'uploader': 'uploadFile/image',
+        'cancelImg': 'img/uploadify-cancel.png',
+        'buttonText': '', 
+        'buttonCursor': 'hand',		// 按钮的鼠标图标
+        'fileObjName': 'uploadify',	//controller中File参数的名称
+        'fileTypeExts': '*.jpg;*.jpeg;*.png;*.bmp;*.gif',
+        'fileTypeDesc': 'Image Files',
+        'fileSizeLimit': '10MB',
+        'onUploadSuccess' : function(file, data, response) {      
+         	$("#image").val(data);
+        	$("#img_href").attr("href", data);
+    		$("#img_src").attr("src", data);
+    		//alert( file.name + ' 上传成功！ ');  
+       	},
+    	'onUploadError': function(file, errorCode, errorMsg, errorString) {
+    		alert( file.name + ' 上传失败！ ' );
+    	}
+    });
+    
+    $('#video_upload').uploadify({
+        'swf': 'misc/uploadify.swf',
+        'uploader': 'uploadFile/video',
+        'cancelImg': 'img/uploadify-cancel.png',
+        'buttonText': '',
+        'buttonCursor': 'hand',		// 按钮的鼠标图标
+        'fileObjName': 'uploadify',	//controller中File参数的名称
+        'fileTypeExts': '*.avi;*.rmvb;*.rm;*.asf;*.divx;*.mpg;*.mpeg;*.mpe;*.wmv;*.mp4;*.mkv;*.vob',
+        'fileTypeDesc': 'Video Files',
+        'fileSizeLimit': '100MB',
+        'onUploadSuccess' : function(file, data, response) {   
+        	$("#video").val(data);
+        	$("#vcd_href").attr("href", data);
+    		$("#vcd_src").attr("src", data);
+    		//alert( file.name + ' 上传成功！ ');  
+       	},
+    	'onUploadError': function(file, errorCode, errorMsg, errorString) {
+    		alert( file.name + ' 上传失败！ ' );
+    	}
     });
 
     //gallery controls container animation

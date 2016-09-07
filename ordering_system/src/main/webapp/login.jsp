@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,7 +18,7 @@
         ===
     -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>用户登录</title>
+    <title>个人用户登录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
     <meta name="author" content="Muhammad Usman">
@@ -51,64 +52,63 @@
     <!-- The fav icon -->
     <link rel="shortcut icon" href="img/favicon.ico">
 
-	<style>
-		a { text-decoration:none; }
-		a:hover { color:red; text-decoration:none; } 
-	</style>
+	<!-- my custom css -->
+	<link href='css/custom.css' rel='stylesheet'>
 </head>
 
 <body>
 <div class="ch-container">
-<div class="row">
-        
-    <div class="row">
-        <div class="col-md-12 center login-header">
-            <img alt="Charisma Logo" src="img/logo20.png" class="hidden-xs" 
-            	style="width:144px;height:76px"/>
-        </div>
-        <!--/span-->
-    </div><!--/row-->
-
-    <div class="row">
-        <div class="well col-md-4 center login-box">
-            
-            <form class="form-horizontal" action="login" method="post">
-                <fieldset>
+	<div class="row">
+	        
+	    <div class="row">
+	        <div class="col-md-12 center login-header">
+	            <img alt="Charisma Logo" src="img/logo20.png" class="hidden-xs" 
+	            	style="width:144px;height:76px"/>
+	        </div>
+	        <!--/span-->
+	    </div><!--/row-->
+	
+	    <div class="row">
+	        <div class="well col-md-4 center login-box">
+	            
+	            <form class="form-horizontal" action="login" method="post">
                     <div class="input-group input-group-lg">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user red"></i></span>
-                        <input type="text" name="account" class="form-control" placeholder="账号/手机号">
+                        <input type="text" id="account" name="account" class="form-control" placeholder="账号/手机号">
                     </div>
-                    <div class="clearfix"></div><br>
+                    <br>
 
                     <div class="input-group input-group-lg">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock red"></i></span>
                         <input type="password" name="password" class="form-control" placeholder="密码">
                     </div>
-                    <div class="clearfix"></div>
+                    
+					<div style="color:red; margin-top:10px;">
+                    	<c:if test="${msg != null}">		       		
+			        		${msg}			        	
+			        	</c:if>
+			        </div>
  
-                    <div class="input-prepend" style="margin:10px">
+                    <div class="input-prepend">
                         <div style="float:left">
                         	<input type="checkbox" id="remember"> 记住账号</input>
                         </div>
                         <div style="float:right">
                         	<a href=""> 忘记密码?</a>
                         </div>
-                    </div>
-                     
-                    <div class="clearfix"></div>
+                    </div>    
 
-                   
-                   	<button type="submit" class="btn btn-default">登录</button>
+					<input type="hidden" name="roleNo" value="4"/>
+					
+                   	<button type="submit" class="btn btn-default" onclick="rememberUser()">登录</button>
 
                    	<button type="button" class="btn" onclick="location='register.jsp'">免费注册</button>
-                   
-                </fieldset>
-            </form>
-        </div>
-        <!--/span-->
-    </div><!--/row-->
-</div><!--/fluid-row-->
-
+	            </form>
+	        </div>
+	        <!--/span-->
+	    </div><!--/row-->
+	</div><!--/fluid-row-->
+	
 </div><!--/.fluid-container-->
 
 <!-- external javascript -->
@@ -146,6 +146,29 @@
 <!-- application script for Charisma demo -->
 <script src="js/charisma.js"></script>
 
+<!-- my custom js -->
+<script src="js/custom.js"></script>
+
+<script type="text/javascript">
+$(function(){
+    if ($.cookie("rememberUser") == "true"){
+        $("#remember").attr("checked", true);
+        $("#account").val($.cookie("account"));
+    }
+});
+
+function rememberUser(){
+    if ($("#remember").is(':checked')){
+        var account = $("#account").val();
+        $.cookie("rememberUser", "true", { expires: 7 }); 	// 存储一个带7天期限的 cookie
+        $.cookie("account", account, { expires: 7 }); 		// 存储一个带7天期限的 cookie
+    }
+    else {
+        $.cookie("rememberUser", "false", { expires: -1 });	// 删除 cookie
+        $.cookie("account", '', { expires: -1 });
+    }
+}
+</script>
 
 </body>
 </html>

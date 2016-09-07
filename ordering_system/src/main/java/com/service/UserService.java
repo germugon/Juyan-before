@@ -17,7 +17,6 @@ import com.model.Role;
 import com.model.Staff;
 import com.model.User;
 import com.model.UserExample;
-import com.model.UserExample.Criteria;
 
 @Service
 public class UserService {
@@ -33,11 +32,35 @@ public class UserService {
 	@Resource
 	private DepartmentMapper departmentMapper;
 	
-	public User ifUserExist(String account, String password) {
+	public User ifUserExist(String account, String password, int roleNo) {
 		
 		UserExample example = new UserExample();
-		Criteria criteria = example.createCriteria();
-		criteria.andAccountEqualTo(account).andPasswordEqualTo(password);
+		UserExample.Criteria criteria = example.createCriteria();
+		criteria.andAccountEqualTo(account).andPasswordEqualTo(password).andRoleNoEqualTo(roleNo);
+		
+		List<User> list = userMapper.selectByExample(example);
+		
+		if( list != null && list.size() > 0 )
+			return list.get(0);
+		else {
+			example.clear();
+			criteria = example.createCriteria();
+			criteria.andPhoneEqualTo(account).andPasswordEqualTo(password).andRoleNoEqualTo(roleNo);
+			
+			list = userMapper.selectByExample(example);
+			
+			if( list != null && list.size() > 0 )
+				return list.get(0);
+			else 
+				return null;	
+		}
+	}
+	
+	public User ifPhoneExist(String phone, int roleNo) {
+		
+		UserExample example = new UserExample();
+		UserExample.Criteria criteria = example.createCriteria();
+		criteria.andPhoneEqualTo(phone).andRoleNoEqualTo(roleNo);
 		
 		List<User> list = userMapper.selectByExample(example);
 		
@@ -78,6 +101,7 @@ public class UserService {
 			user.setAccount(merchant.getMerchantNo());
 			user.setName(merchant.getName()); 
 			user.setPassword(merchant.getPassword());
+			user.setPhone(merchant.getPhone());
 			user.setRoleNo(merchant.getRoleNo());
 			user.setRoleName(merchant.getRoleName());
 			
@@ -103,6 +127,7 @@ public class UserService {
 			user.setAccount(staff.getStaffNo());
 			user.setName(staff.getName());
 			user.setPassword(staff.getPassword());
+			user.setPhone(staff.getPhone());
 			user.setRoleNo(staff.getRoleNo());
 			user.setRoleName(staff.getRoleName());
 			
