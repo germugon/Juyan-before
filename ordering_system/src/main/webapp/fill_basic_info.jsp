@@ -71,7 +71,7 @@
 	    </div><!--/row-->
     
     
-        <div id="content" class="col-md-3 center ">
+        <div id="content" class="col-md-5 center ">
             <!-- content starts -->
 
 			<form onsubmit="return check_all()" action="register" method="post">
@@ -200,7 +200,7 @@ function check_password_confirm(){
 function check_account(){
 	var account = $("#account").val();
 	//验证账号格式！！！
-	if(account != null || account != ""){
+	if(account != null && account != ""){
 		$.ajax({
 		   	type: "POST",
 		   	url: "ifAccountExist",

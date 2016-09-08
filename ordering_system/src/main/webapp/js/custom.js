@@ -55,12 +55,12 @@ $('.form_date').datetimepicker({
 
 
 $(function(){
-    $('.add-new').toggle();
+	$('.add-new').toggle();
 });
 
 $('#add').click(function(){
-    var $target = $(this).next('.add-new');
-    $target.slideToggle();
+    //var $target = $(this).parent().next('.add-new');
+    $('.add-new').slideToggle();
 });
 
          

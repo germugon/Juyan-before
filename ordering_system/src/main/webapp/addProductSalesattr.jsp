@@ -88,13 +88,76 @@
 			            
 			            <div class="box-content">
 			                
-			                <table id="salesattr"></table>
+			                <table id="dataTable" class="table">
+			                	<thead>
+			                        <tr>
+			                            <th>sku编码</th>
+			                            <th>属性名称</th>
+			                            <th>属性图片</th>
+			                            <th>属性描述</th>
+			                            <th>价格（元）</th>
+			                            <th>是否卫检</th>
+			                            <th>库存（件）</th>
+			                            <th>警戒库存（件）</th>
+			                            <th>上架时间</th>
+			                            <th>状态</th>
+			                            <th>操作</th>
+			                        </tr>
+			                 	</thead>
+			                    <tbody>
+			                    	<c:forEach items="${ProductSalesattrList}" var="prodSalesattr">    	
+                        				<tr>                      		
+                        					<td>${prodSalesattr.sku}</td>
+				                            <td>${prodSalesattr.attrName}</td>
+				                            <td>
+				                           		<a href="${prodSalesattr.attrName}">
+				                            		<img src="${prodSalesattr.attrName}" class="small"/>
+				                            	</a>
+				                            </td>
+				                            <td>${prodSalesattr.description}</td>				                            
+				                            <td>${prodSalesattr.price}</td>
+				                            <td>
+				                            	<c:if test="${prodSalesattr.isInspect == 'Y'}">
+				                            		<span class="label-success label-default label">是</span>
+				                            	</c:if>
+				                            	<c:if test="${prodSalesattr.isInspect == 'N'}">
+				                            		<span class="label-default label">否</span>
+				                            	</c:if>
+				                            </td>
+				                            <td>${prodSalesattr.stock}</td>
+				                            <td>${prodSalesattr.stockWarn}</td>
+				                            <td>${prodSalesattr.onsaleTime}</td>
+				                            <td>
+				                            	<c:if test="${prodSalesattr.status == 1}">
+				                            		<span class="label-default label label-danger">待售</span>
+				                            	</c:if>
+				                            	<c:if test="${prodSalesattr.status == 2}">
+				                            		<span class="label-default label label-success">在售</span>
+				                            	</c:if>
+				                            	<c:if test="${prodSalesattr.status == 3}">
+				                            		<span class="label-default label">下架</span>
+				                            	</c:if>
+				                            </td> 
+				                            <td>
+				                            	<a class="glyphicon glyphicon-trash link"
+				                            		onclick="deleteRow(this,${prodSalesattr.sku})">
+				                            	</a>
+				                            </td>
+                        				</tr>
+                        			</c:forEach>	
+                        		</tbody>			                 
+			                </table>
 					            
-					            
-					        <i id="add" class="glyphicon glyphicon-edit" style="margin:10px 10px 50px 80px;">
-				          		<label>添加新属性</label></i>	
+					        
+					        <div style="margin:80px 10px 10px 80px;">   
+						        <i id="add" class="glyphicon glyphicon-edit" >
+					          		<label>添加新属性</label></i>
+					          	<br>
+					          	<div id="msg" class="warn-msg"><c:if test="${msg != null}">${msg}</c:if></div>
+					          	<br>
+				          	</div> 
 				                
-							<div class="add-new">			                 
+							<form id="form" class="add-new">			                 
 
 				            	<table>
 				            		<tr>
@@ -120,9 +183,9 @@
 				            			<td class="title">属性图片</td>
 					            		<td>
 					            			<a id="img_href" href="${image}">
-						             			<img id="img_src" src="${image}" onload="onPreviewLoad(this,200)"/>
+						             			<img id="img_src" src="${image}" onload="onPreviewLoad(this,50)"/>
 						               		</a>
-						               		<input type="hidden" id="image" name="image"/>
+						               		<input type="hidden" id="image" name="image" value="${image}"/>
 					            			<input type="file" id="image_upload" data-no-uniform="true" />
 					            		</td>
 					            		<td id="image_warn" class="warn-msg"></td>
@@ -190,18 +253,16 @@
 					              	</tr>	
 					              	
 					              	<tr>
-					              		<td><input type="hidden" name="prodNo" value="${prodNo}"/></td>
+					              		<!-- 此处仅供测试使用，实际运行改回name="prodNo" value="${prodNo}" -->
+					              		<td><input type="hidden" name="prodNo" value="JY002"/></td>
 				            			<td><button type="button" id="save" class="btn btn-primary" 
 				            				style="width:100px">保存</button></td>
 				            			<td><td>
-				            				
-				            			<td class="title"></td>
-				            			<td><div class="warn-msg"><c:if test="${msg != null}">${msg}</c:if></div></td>
-				            			<td></td>
+				            								            			
 				            		</tr>	
 								</table>
-    
-				            </div>
+    							
+				            </form>
 			                
 			            </div>
 			        </div>
@@ -261,49 +322,106 @@
 <script src="js/custom.js"></script>
 
 <script type="text/javascript">
-$(function(){
-	$("#save").click(function(){
-		
-		var sku = $("#sku").val();
-		var attrName = $("#attrName").val();
-		var image = $("#image").val();
-		var description = $("#description").val();
-		var price = $("#price").val();
-		var isInspect = $("#isInspect").val();
-		var stock = $("#stock").val();
-		var stockWarn = $("#stockWarn").val();
-		var onsaleTime = $("#onsaleTime").val();
-		var status = $("#status").val();
-		var prodNo = $("#prodNo").val();
+function deleteRow(sender,sku){
+	//if (window.confirm("确认删除？"))
+	var prodNo = $("*[name='prodNo']").val();
+	if(prodNo != null || prodNo != '') {
+		$.ajax({
+			type: "POST",
+			url: "removeProductSalesattr",
+			data: {
+				sku: sku,
+				prodNo: prodNo
+			},
+			dataType:"text",
+			success: function(data){
+				if(data == '') {
+					$(sender).parent().parent().remove();
+				} else {
+					$("#msg").html(data);
+				}
+			},
+			error: function(){
+				alert("删除属性失败");
+			}
+		});
+	}
+	
+}
 
-		if(sku != null){
+$(function(){
+	/*
+	$("#dataTable").dataTable({
+		"aaSorting": [[1, "asc"]],
+		"iDisplayLength":10,
+	    "bDestroy": true,
+	    "oLanguage": {					//多语言配置
+	    	"sProcessing": "正在加载中...",
+	    	"sLengthMenu": "每页显示 _MENU_ 条记录",
+	    	"sZeroRecords": "对不起，查询不到相关数据！",
+	    	"sInfoEmpty": " 0 条记录",
+	    	"sInfo": "共 _TOTAL_ 条记录",
+	    	"sInfoFiltered": "(从 _MAX_ 条记录中检索)",
+	    	"sSearch": "搜索",
+	    	"oPaginate": {
+	    	 	"sFirst": "首页",
+	    	    "sPrevious": "上一页",
+	    	    "sNext": "下一页",
+	    	    "sLast": "末页"
+	    	}
+	    } 
+	});	
+	*/
+	
+	$("#save").click(function(){
+		var map = {};
+		$("input").each(function(){
+			if($(this).attr("type") == 'text' || $(this).attr("type") == 'hidden') {
+				var name = $(this).attr("name");
+				if(name != undefined)
+		    		map[name] = $(this).val();
+			}
+		});
+		
+		$("textarea").each(function(){
+			map[$(this).attr("name")] = $(this).val();
+		});
+		
+		$("select").each(function(){
+			map[$(this).attr("name")] = $(this).find("option:selected").text();
+		});
+		
+		/*
+		$.each(map, function(index, value) { 
+			alert(index + ':' + value); 
+		});
+		*/
+		
+		var form_data = decodeURIComponent($("#form").serialize(),true);
+
+		var sku = $("*[name='sku']").val();
+		if(sku != null && sku != ''){
 			$.ajax({
 			   	type: "POST",
 			   	url: "addProductSalesattr",
-			   	data: {
-			   		sku: sku,
-					attrName: attrName,
-					image: image,
-					description: description,
-					price: price,
-					isInspect: isInspect,,
-					stock: stock,
-					stockWarn: stockWarn,
-					onsaleTime: onsaleTime,
-					status: status,
-					prodNo: prodNo
-			   	},
+			   	data: form_data,
 			   	dataType:"text",
 			   	success: function(data){
-			   		$(".add-new").slideToggle();
-			   		$("#salesattr").append(
-			   			"<tr><td>"+sku+"</td><td>"+attrName+"</td><td>"+
-			   			"<a href='"+image+"'><img src='"+image+"' class='small'/></a></td><td>"+
-			   			description+"</td><td>"+
-			   			price+"</td><td>"+isInspect+"</td><td>"+
-			   			stock+"</td><td>"+stockWarn+"</td><td>"+
-			   			onsaleTime+"</td><td>"+status+"</td></tr>"
-			   		);
+			   		if(data == '') {
+				   		$(".add-new").slideToggle();
+				   		$("#dataTable").append("<tr><td>" + map['sku'] + "</td><td>" + map['attrName'] + "</td><td>" +
+						  		"<a href='" + map['image'] + "'><img src='" + map['image'] + "' class='small'/></a></td><td>" +
+						   		map['description'] + "</td><td>" +
+						   		map['price'] + "</td><td>" + map['isInspect'] + "</td><td>" +
+						   		map['stock'] + "</td><td>" + map['stockWarn'] + "</td><td>" +
+						  		map['onsaleTime'] + "</td><td>" + map['status'] + "</td><td>" +
+						  		"<a class='glyphicon glyphicon-trash link' onclick='deleteRow(this," + 
+						  		map['sku'] + ")'></a></td></tr>"			   	
+					   	);		
+				   		$("#msg").html("");
+			   		} else {
+			   			$("#msg").html(data);
+			   		}
 			   	},
 			   	error: function(){
 			    	alert("添加新属性失败");

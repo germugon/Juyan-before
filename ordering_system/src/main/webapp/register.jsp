@@ -71,7 +71,7 @@
 	        <!--/span-->
 	    </div><!--/row-->
     
-        <div id="content" class="col-md-3 center ">
+        <div id="content" class="col-md-5 center ">
             <!-- content starts -->
 
 			<form class="form-inline" onsubmit="check_pin()" action="verifyByPhone" method="post">
@@ -176,7 +176,7 @@ function next_disabled(op){
 function check_phone(){
 	var phone = $("#phone").val();
 	//验证手机格式！！！
-	if(phone != null || phone != ""){
+	if(phone != null && phone != ""){
 		$.ajax({
 		   	type: "POST",
 		   	url: "ifPhoneExist",
@@ -229,7 +229,8 @@ $(function(){
 	
 	$("#getPin").click(function(){
 		var phone = $("#phone").val();
-		if(phone != null){
+		//验证手机格式
+		if(phone != null || phone != ''){
 			$.ajax({
 			   	type: "POST",
 			   	url: "sendPin",

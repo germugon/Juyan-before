@@ -8,6 +8,13 @@
                     </div>
                     <ul class="nav nav-pills nav-stacked main-menu">
                         <li class="nav-header">Main</li>
+                        <li class="accordion">
+                            <a href="#"><i class="glyphicon glyphicon-plus"></i><span> 商品管理</span></a>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="addProduct.jsp"></a>添加新商品</li>
+                                <li><a href="#">商品管理</a></li>
+                            </ul>
+                        </li>
                         <li><a class="ajax-link" href="index.html"><i class="glyphicon glyphicon-home"></i><span> Dashboard</span></a>
                         </li>
                         <li><a class="ajax-link" href="ui.html"><i class="glyphicon glyphicon-eye-open"></i><span> UI Features</span></a>

@@ -94,7 +94,7 @@
                         	<input type="checkbox" id="remember"> 记住账号</input>
                         </div>
                         <div style="float:right">
-                        	<a href=""> 忘记密码?</a>
+                        	<a href="" class="link"> 忘记密码?</a>
                         </div>
                     </div>    
 
